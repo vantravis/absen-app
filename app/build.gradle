@@ -1,0 +1,56 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.1"
+    defaultConfig {
+        applicationId "com.example.trykotlin"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            // LIVE
+//            buildConfigField "String", "BASE_URL", "\"https://account.accurate.id/\""
+//            buildConfigField "String", "API_KEY", "\"e8eb264d-b0b9-43d7-9122-757222230adb\""
+//            buildConfigField "String", "SIGN_SECRET", "\"7c2b3f9ffccfb2ef0c35c82f78b91d6c\""
+//            buildConfigField "String", "OAUTH_SECRET", "\"7bb15fba0d1287e8a5f34ff489ce7322\""
+//            buildConfigField "String", "APP_KEY", "\"f953c488-3166-407b-b54e-4f829e2fdb4b\""
+
+            // DEV
+            buildConfigField "String", "BASE_URL", "\"192.168.3.54://sidpi-backend/api/\""
+
+            buildConfigField "boolean", "IS_PRODUCTION", "false"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.0.0'
+    kapt group: 'androidx.lifecycle', name: 'lifecycle-compiler', version: '2.0.0'
+
+}
